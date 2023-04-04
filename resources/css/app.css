@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*@layer utilities {*/
+/*    .gradient {*/
+/*        background: radial-gradient(50% 50% at 50% 50%, #4E4E4E 0%, #3D3B3B 99.99%, #3D3B3B 100%);*/
+/*    }*/
+/*}*/
+
+@font-face {
+    font-family: Sansation;
+    src: url("../../public/fonts/Sansation-Regular.ttf");
+}
+
+@layer base {
+    body {
+        font-family: Sansation, system-ui, sans-serif;
+    }
+    .gradient{
+        background: radial-gradient(50% 50% at 50% 50%, #4E4E4E 0%, #3D3B3B 99.99%, #3D3B3B 100%);
+    }
+    .language-buttons{
+        @apply w-[58px] h-[58px] border-2 border-white rounded-full flex justify-center items-center cursor-pointer
+    }
+}
