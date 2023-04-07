@@ -32,3 +32,11 @@ Route::get('/admin-movies', function () {
 		'movies' => \App\Models\Movie::all(),
 	]);
 });
+Route::delete('/movies/{movie}', function () {
+	\App\Models\Movie::destroy(request()->movie);
+	return redirect('/admin-movies');
+});
+Route::delete('/quotes/{quote}', function () {
+	\App\Models\Quote::destroy(request()->quote);
+	return redirect('/admin-quotes');
+});
