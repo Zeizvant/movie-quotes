@@ -4,7 +4,7 @@ namespace App\Http\Requests\Quote;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreQuoteRequest extends FormRequest
+class UpdateQuoteRequest extends FormRequest
 {
 	/**
 	 * Get the validation rules that apply to the request.
@@ -14,9 +14,9 @@ class StoreQuoteRequest extends FormRequest
 	public function rules(): array
 	{
 		return [
-			'name'            => 'required',
-			'movie'           => 'required',
-			'thumbnail'       => 'required',
+			'name'         => 'required',
+			'movie'        => 'required',
+			'thumbnail'    => 'required',
 		];
 	}
 }

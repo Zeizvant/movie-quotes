@@ -35,4 +35,6 @@ Route::controller(QuoteController::class)->group(function () {
 	Route::get('/quotes/create', 'create');
 	Route::get('/admin-quotes', 'showList');
 	Route::post('/quotes', 'store');
+	Route::get('/quotes/{quote}/edit', 'edit');
+	Route::put('/quotes/{quote}', 'update');
 });
