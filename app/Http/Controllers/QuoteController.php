@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Quote\StoreQuoteRequest;
+use App\Models\Movie;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use App\Models\Quote;
-use App\Models\Movie;
 
 class QuoteController extends Controller
 {
@@ -30,9 +31,29 @@ class QuoteController extends Controller
 		return redirect('/admin-quotes');
 	}
 
-	public function create()
+	public function store(StoreQuoteRequest $request): RedirectResponse
 	{
-		return 'create';
+		$image = $request->file('thumbnail');
+
+		$extension = $image->getClientOriginalExtension();
+		$filename = time() . '.' . $extension;
+		$image->move('images', $filename);
+
+		Quote::create([
+			'body'      => $request->name,
+			'thumbnail' => '/images/' . $filename,
+			'movie_id'  => Movie::where('name', '=', $request->movie)->value('id'),
+		]);
+
+		return redirect('/admin-quotes');
+	}
+
+	public function create(): View
+	{
+		return view('add-data', [
+			'data'   => 'quotes',
+			'movies' => Movie::all(),
+		]);
 	}
 
 	public function showList()

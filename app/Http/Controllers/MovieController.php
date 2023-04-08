@@ -34,7 +34,9 @@ class MovieController extends Controller
 
 	public function create(): View
 	{
-		return view('add-data');
+		return view('add-data', [
+			'data' => 'movies',
+		]);
 	}
 
 	public function store(StoreMovieRequest $request): RedirectResponse

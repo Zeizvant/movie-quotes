@@ -32,10 +32,5 @@ Route::controller(QuoteController::class)->group(function () {
 	Route::delete('/quotes/{quote}', 'delete');
 	Route::get('/quotes/create', 'create');
 	Route::get('/admin-quotes', 'showList');
-});
-
-Route::get('/admin-quotes', function () {
-	return view('quotes-dashboard', [
-		'quotes' => \App\Models\Quote::all(),
-	]);
+	Route::post('/quotes', 'store');
 });
