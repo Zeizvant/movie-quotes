@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MovieController;
+use App\Http\Controllers\QuoteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,30 +15,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-	return view('landing');
-});
-Route::get('/movie', function () {
-	return view('movie');
-});
 Route::get('/login', function () {
 	return view('login');
 });
+
+Route::controller(MovieController::class)->group(function () {
+	Route::get('/movie/{movie}', 'show');
+	Route::delete('/movies/{movie}', 'delete');
+	Route::get('/movies/create', 'create');
+	Route::post('/movies', 'store');
+	Route::get('/admin-movies', 'showList');
+});
+
+Route::controller(QuoteController::class)->group(function () {
+	Route::get('/', 'show');
+	Route::delete('/quotes/{quote}', 'delete');
+	Route::get('/quotes/create', 'create');
+	Route::get('/admin-quotes', 'showList');
+});
+
 Route::get('/admin-quotes', function () {
 	return view('quotes-dashboard', [
 		'quotes' => \App\Models\Quote::all(),
 	]);
-});
-Route::get('/admin-movies', function () {
-	return view('movies-dashboard', [
-		'movies' => \App\Models\Movie::all(),
-	]);
-});
-Route::delete('/movies/{movie}', function () {
-	\App\Models\Movie::destroy(request()->movie);
-	return redirect('/admin-movies');
-});
-Route::delete('/quotes/{quote}', function () {
-	\App\Models\Quote::destroy(request()->quote);
-	return redirect('/admin-quotes');
 });

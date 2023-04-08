@@ -12,6 +12,6 @@
             <div class="language-buttons">en</div>
             <div class="language-buttons bg-white text-black bg-white">ka</div>
         </div>
-        {{ $slot  }}
+        {{ $slot }}
     </body>
 </html>
