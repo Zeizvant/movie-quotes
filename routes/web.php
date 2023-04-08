@@ -25,6 +25,8 @@ Route::controller(MovieController::class)->group(function () {
 	Route::get('/movies/create', 'create');
 	Route::post('/movies', 'store');
 	Route::get('/admin-movies', 'showList');
+	Route::get('/movies/{movie}/edit', 'edit');
+	Route::put('/movies/{movie}', 'update');
 });
 
 Route::controller(QuoteController::class)->group(function () {

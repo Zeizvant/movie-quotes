@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Movie\StoreMovieRequest;
+use App\Http\Requests\Movie\UpdateMovieRequest;
 use App\Models\Movie;
 use App\Models\Quote;
 use Illuminate\Http\RedirectResponse;
@@ -36,6 +37,7 @@ class MovieController extends Controller
 	{
 		return view('add-data', [
 			'data' => 'movies',
+			'type' => 'add',
 		]);
 	}
 
@@ -52,5 +54,23 @@ class MovieController extends Controller
 		return view('movies-dashboard', [
 			'movies' => Movie::all(),
 		]);
+	}
+
+	public function edit(Movie $movie): View
+	{
+		return view('add-data', [
+			'data'   => 'movies',
+			'value'  => $movie,
+			'type'   => 'update',
+		]);
+	}
+
+	public function update(Movie $movie, UpdateMovieRequest $request): RedirectResponse
+	{
+		$data = Movie::find($movie->id);
+		$data->name = $request->name;
+		$data->save();
+
+		return redirect('/admin-movies');
 	}
 }
