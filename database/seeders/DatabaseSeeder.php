@@ -23,27 +23,27 @@ class DatabaseSeeder extends Seeder
 		]);
 		Quote::factory()->create([
 			'body'      => '“I’ll be back.”',
-			'thumbnail' => "/images/I'll be back.webp",
+			'thumbnail' => 'images/1.jpeg',
 			'movie_id'  => 1,
 		]);
 		Quote::factory()->create([
 			'body'      => '“You just can’t go around killing people.”',
-			'thumbnail' => '/images/You just can’t go around killing people..webp',
+			'thumbnail' => 'images/2.jpg',
 			'movie_id'  => 1,
 		]);
 		Quote::factory()->create([
 			'body'      => '“Hasta la vista, baby.”',
-			'thumbnail' => '/images/Hasta la vista, baby.webp',
+			'thumbnail' => 'images/3.jpeg',
 			'movie_id'  => 1,
 		]);
 		Quote::factory()->create([
 			'body'      => "“A-Ta-Ta-Ta-Ta, Let's Not Blow This Out Of Proportion.”",
-			'thumbnail' => "/images/Let's Not Blow This Out Of Proportion..avif",
+			'thumbnail' => 'images/4.jpeg',
 			'movie_id'  => 2,
 		]);
 		Quote::factory()->create([
 			'body'      => "“I'm Batman.”",
-			'thumbnail' => "/images/I'm Batman..avif",
+			'thumbnail' => 'images/5.jpeg',
 			'movie_id'  => 2,
 		]);
 

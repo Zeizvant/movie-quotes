@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Quote\StoreQuoteRequest;
 use App\Models\Movie;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use App\Models\Quote;
 
@@ -30,23 +30,18 @@ class QuoteController extends Controller
 	{
 		$imagePath = Quote::find(request()->quote)->thumbnail;
 		Quote::destroy(request()->quote);
-		if (File::exists(ltrim($imagePath, '/'))) {
-			File::delete(ltrim($imagePath, '/'));
-		}
+		Storage::delete($imagePath);
 		return redirect('/admin-quotes');
 	}
 
 	public function store(StoreQuoteRequest $request): RedirectResponse
 	{
 		$image = $request->file('thumbnail');
-
-		$extension = $image->getClientOriginalExtension();
-		$filename = time() . '.' . $extension;
-		$image->move('images', $filename);
+		$path = $image->store('images');
 
 		Quote::create([
 			'body'      => $request->name,
-			'thumbnail' => '/images/' . $filename,
+			'thumbnail' => $path,
 			'movie_id'  => Movie::where('name', '=', $request->movie)->value('id'),
 		]);
 
