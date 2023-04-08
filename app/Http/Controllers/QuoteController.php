@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Quote\StoreQuoteRequest;
 use App\Models\Movie;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\File;
 use Illuminate\View\View;
 use App\Models\Quote;
 
@@ -27,7 +28,11 @@ class QuoteController extends Controller
 
 	public function delete(): RedirectResponse
 	{
+		$imagePath = Quote::find(request()->quote)->thumbnail;
 		Quote::destroy(request()->quote);
+		if (File::exists(ltrim($imagePath, '/'))) {
+			File::delete(ltrim($imagePath, '/'));
+		}
 		return redirect('/admin-quotes');
 	}
 
