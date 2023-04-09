@@ -44,7 +44,10 @@ class MovieController extends Controller
 	public function store(StoreMovieRequest $request): RedirectResponse
 	{
 		Movie::create([
-			'name' => $request->name,
+			'name' => [
+				'en' => $request->name['en'],
+				'ka' => $request->name['ka'],
+			],
 		]);
 		return redirect('/admin-movies');
 	}
@@ -67,8 +70,9 @@ class MovieController extends Controller
 
 	public function update(Movie $movie, UpdateMovieRequest $request): RedirectResponse
 	{
+		$translations = ['en' => $request->name['en'], 'ka' => $request->name['ka']];
 		$data = Movie::find($movie->id);
-		$data->name = $request->name;
+		$data->replaceTranslations('name', $translations);
 		$data->save();
 
 		return redirect('/admin-movies');
