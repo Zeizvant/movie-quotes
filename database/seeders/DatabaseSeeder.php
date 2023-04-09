@@ -14,30 +14,47 @@ class DatabaseSeeder extends Seeder
 	 */
 	public function run(): void
 	{
-		//		\App\Models\Movie::factory(5)->create();
 		Movie::factory()->create([
-			'name' => 'The Terminator',
+			'name' => [
+				'en' => 'The Terminator',
+				'ka' => 'ტერმინატორი',
+			],
 		]);
 		Movie::factory()->create([
-			'name' => 'The Dark Knight',
+			'name' => [
+				'en' => 'The Dark Knight',
+				'ka' => 'შავი რაინდი',
+			],
 		]);
 		Quote::factory()->create([
-			'body'      => '“I’ll be back.”',
+			'body'      => [
+				'en' => '“I’ll be back.”',
+				'ka' => 'ტესტ',
+			],
 			'thumbnail' => 'images/1.jpeg',
 			'movie_id'  => 1,
 		]);
 		Quote::factory()->create([
-			'body'      => '“You just can’t go around killing people.”',
+			'body'      => [
+				'en' => '“You just can’t go around killing people.”',
+				'ka' => 'ტესტ',
+			],
 			'thumbnail' => 'images/2.jpg',
 			'movie_id'  => 1,
 		]);
 		Quote::factory()->create([
-			'body'      => '“Hasta la vista, baby.”',
+			'body'      => [
+				'en' => '“Hasta la vista, baby.”',
+				'ka' => 'ტესტ',
+			],
 			'thumbnail' => 'images/3.jpeg',
 			'movie_id'  => 1,
 		]);
 		Quote::factory()->create([
-			'body'      => "“A-Ta-Ta-Ta-Ta, Let's Not Blow This Out Of Proportion.”",
+			'body'      => [
+				'en' => "“A-Ta-Ta-Ta-Ta, Let's Not Blow This Out Of Proportion.”",
+				'ka' => 'ტესტ',
+			],
 			'thumbnail' => 'images/4.jpeg',
 			'movie_id'  => 2,
 		]);
