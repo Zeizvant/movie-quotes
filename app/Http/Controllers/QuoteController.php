@@ -42,9 +42,12 @@ class QuoteController extends Controller
 		$path = $image->store('images');
 
 		Quote::create([
-			'body'      => $request->name,
+			'body'      => [
+				'en' => $request->name['en'],
+				'ka' => $request->name['ka'],
+			],
 			'thumbnail' => $path,
-			'movie_id'  => Movie::where('name', '=', $request->movie)->value('id'),
+			'movie_id'  => Movie::where('name->en', '=', $request->movie)->value('id'),
 		]);
 
 		return redirect('/admin-quotes');
@@ -81,11 +84,12 @@ class QuoteController extends Controller
 	{
 		$image = $request->file('thumbnail');
 		$path = $image->store('images');
+		$translations = ['en' => $request->name['en'], 'ka' => $request->name['ka']];
 
 		$data = Quote::find($quote->id);
-		$data->body = $request->name;
+		$data->replaceTranslations('body', $translations);
 		$data->thumbnail = $path;
-		$data->movie_id = Movie::where('name', '=', $request->movie)->value('id');
+		$data->movie_id = Movie::where('name->en', '=', $request->movie)->value('id');
 		$data->save();
 
 		return redirect('admin-quotes');
