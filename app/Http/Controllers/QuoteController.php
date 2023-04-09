@@ -13,8 +13,11 @@ use App\Models\Quote;
 
 class QuoteController extends Controller
 {
-	public function show(): View
+	public function show($lang = ''): View|RedirectResponse
 	{
+		if ($lang != '' and $lang != 'ka') {
+			return redirect()->route('quote.show');
+		}
 		$id = rand(1, sizeOf(Quote::all()));
 		$quote = Quote::find($id);
 		if ($quote) {
@@ -25,6 +28,7 @@ class QuoteController extends Controller
 		return view('landing', [
 			'quote' => $quote,
 			'movie' => $movie,
+			'lang'  => $lang,
 		]);
 	}
 

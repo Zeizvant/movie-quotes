@@ -26,7 +26,7 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::controller(MovieController::class)->group(function () {
-	Route::get('/movie/{movie}', 'show')->name('movie.show');
+	Route::get('/movie/{movie}/{lang?}', 'show')->name('movie.show');
 	Route::delete('/movies/{movie}', 'delete')->middleware('auth')->name('movie.delete');
 	Route::get('/movies/create', 'create')->middleware('auth')->name('movie.create');
 	Route::post('/movies', 'store')->middleware('auth')->name('movie.show');
@@ -36,7 +36,7 @@ Route::controller(MovieController::class)->group(function () {
 });
 
 Route::controller(QuoteController::class)->group(function () {
-	Route::get('/', 'show')->name('quote.show');
+	Route::get('/{lang?}', 'show')->name('quote.show');
 	Route::delete('/quotes/{quote}', 'delete')->middleware('auth')->name('quote.delete');
 	Route::get('/quotes/create', 'create')->middleware('auth')->name('quote.create');
 	Route::get('/admin-quotes', 'showList')->middleware('auth')->name('quote.showList');

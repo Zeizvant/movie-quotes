@@ -11,8 +11,11 @@ use Illuminate\View\View;
 
 class MovieController extends Controller
 {
-	public function show(): View
+	public function show(): View|RedirectResponse
 	{
+		if (request()->lang != '' and request()->lang != 'ka') {
+			return redirect()->route('movie.show');
+		}
 		$id = request()->movie;
 		$movie = Movie::find($id);
 		if ($movie) {
@@ -24,6 +27,7 @@ class MovieController extends Controller
 		return view('movie', [
 			'quotes' => $quotes,
 			'movie'  => $movie,
+			'lang'   => request()->lang,
 		]);
 	}
 
