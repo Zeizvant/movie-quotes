@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 
 class AuthController extends Controller
 {
-	public function login(): RedirectResponse
+	public function login(LoginRequest $request): RedirectResponse
 	{
-		$attributes = request()->validate([
-			'username' => ['required', 'exists:users'],
-			'password' => ['required'],
-		]);
+		$attributes = ['username' => $request->username, 'password' => $request->password];
 		if (auth()->attempt($attributes)) {
-			return redirect('/admin-quotes');
+			return redirect()->route('movie.showList');
 		}
-		return back()->withErrors(['password' =>'invalid password']);
+		return back()->withErrors(['password' => 'invalid password']);
 	}
 
 	public function logout(): RedirectResponse
