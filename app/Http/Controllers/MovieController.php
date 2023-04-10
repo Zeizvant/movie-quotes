@@ -27,7 +27,7 @@ class MovieController extends Controller
 	public function delete(): RedirectResponse
 	{
 		Movie::destroy(request()->movie);
-		return redirect()->route('movie.showList');
+		return redirect()->route('admin.movie.show');
 	}
 
 	public function create(): View
@@ -46,14 +46,7 @@ class MovieController extends Controller
 				'ka' => $request->name['ka'],
 			],
 		]);
-		return redirect()->route('movie.showList');
-	}
-
-	public function showList(): View
-	{
-		return view('movies-dashboard', [
-			'movies' => Movie::all(),
-		]);
+		return redirect()->route('admin.movie.show');
 	}
 
 	public function edit(Movie $movie): View
@@ -72,6 +65,6 @@ class MovieController extends Controller
 		$data->replaceTranslations('name', $translations);
 		$data->save();
 
-		return redirect()->route('movie.showList');
+		return redirect()->route('admin.movie.show');
 	}
 }

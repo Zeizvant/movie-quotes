@@ -11,7 +11,7 @@ class AuthController extends Controller
 	{
 		$attributes = ['username' => $request->username, 'password' => $request->password];
 		if (auth()->attempt($attributes)) {
-			return redirect()->route('movie.showList');
+			return redirect()->route('admin.movie.show');
 		}
 		return back()->withErrors(['password' => 'invalid password']);
 	}

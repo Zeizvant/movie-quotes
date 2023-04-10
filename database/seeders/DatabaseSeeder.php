@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Movie;
 use App\Models\Quote;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -57,6 +58,10 @@ class DatabaseSeeder extends Seeder
 			],
 			'thumbnail' => 'images/4.jpeg',
 			'movie_id'  => 2,
+		]);
+		User::factory()->create([
+			'username' => 'admin',
+			'password' => bcrypt('admin'),
 		]);
 	}
 }

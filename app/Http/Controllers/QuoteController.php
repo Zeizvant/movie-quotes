@@ -29,7 +29,7 @@ class QuoteController extends Controller
 		$imagePath = Quote::find(request()->quote)->thumbnail;
 		Quote::destroy(request()->quote);
 		Storage::delete($imagePath);
-		return redirect()->route('quote.showList');
+		return redirect()->route('admin.quote.show');
 	}
 
 	public function store(StoreQuoteRequest $request): RedirectResponse
@@ -46,7 +46,7 @@ class QuoteController extends Controller
 			'movie_id'  => Movie::where('name->en', '=', $request->movie)->value('id'),
 		]);
 
-		return redirect()->route('quote.showList');
+		return redirect()->route('admin.quote.show');
 	}
 
 	public function create(): View
@@ -55,13 +55,6 @@ class QuoteController extends Controller
 			'data'   => 'quote',
 			'movies' => Movie::all(),
 			'type'   => 'add',
-		]);
-	}
-
-	public function showList(): View
-	{
-		return view('quotes-dashboard', [
-			'quotes' => Quote::all(),
 		]);
 	}
 
@@ -88,6 +81,6 @@ class QuoteController extends Controller
 		$data->movie_id = Movie::where('name->en', '=', $request->movie)->value('id');
 		$data->save();
 
-		return redirect()->route('quote.showList');
+		return redirect()->route('admin.quote.show');
 	}
 }

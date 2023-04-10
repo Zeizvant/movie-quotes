@@ -5,7 +5,7 @@
         @vite('resources/css/app.css')
     </head>
     <body class="h-full md:flex md:justify-center md:items-center">
-        <form method="POST" action="{{ $type === 'update'? route($data . '.edit', [$data => $value->id]) : route($data . '.store') }}" enctype="multipart/form-data" class="md:w-1/2  m-10">
+        <form method="POST" action="{{ $type === 'update'? route($data . '.update', [$data => $value->id]) : route($data . '.store') }}" enctype="multipart/form-data" class="md:w-1/2  m-10">
             @csrf
             @if($type === 'update')
                 @method('PUT')
