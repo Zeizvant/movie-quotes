@@ -21,7 +21,7 @@
         background: radial-gradient(50% 50% at 50% 50%, #4E4E4E 0%, #3D3B3B 99.99%, #3D3B3B 100%);
     }
     .language-buttons{
-        @apply w-[58px] h-[58px] border-2 border-white rounded-full flex justify-center items-center cursor-pointer
+        @apply w-[58px] h-[58px] border-2 border-white rounded-full flex justify-center items-center cursor-pointer text-white
     }
     .main-dashboard-button{
         @apply rounded-md bg-indigo-600 px-3.5 py-2.5 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600

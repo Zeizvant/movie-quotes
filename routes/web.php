@@ -5,6 +5,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +49,5 @@ Route::controller(QuoteController::class)->group(function () {
 	Route::get('/quotes/{quote}/edit', 'edit')->middleware('auth')->name('quote.edit');
 	Route::put('/quotes/{quote}', 'update')->middleware('auth')->name('quote.update');
 });
+
+Route::get('/change/{locale}', [LanguageController::class, 'setLocale'])->name('language.change');
