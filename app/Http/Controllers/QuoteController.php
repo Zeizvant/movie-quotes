@@ -18,8 +18,7 @@ class QuoteController extends Controller
 		if ($lang != '' and $lang != 'ka') {
 			return redirect()->route('quote.show');
 		}
-		$id = rand(1, sizeOf(Quote::all()));
-		$quote = Quote::findOrFail($id);
+		$quote = Quote::all()->random();
 		$movie = Movie::findOrFail($quote->movie_id);
 		return view('landing', [
 			'quote' => $quote,
