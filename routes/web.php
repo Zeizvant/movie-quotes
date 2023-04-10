@@ -28,8 +28,8 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::controller(AdminController::class)->group(function () {
-	Route::get('/admin/movies', 'showQuotes')->middleware('auth')->name('admin.quote.show');
-	Route::get('/admin/quotes', 'showMovies')->middleware('auth')->name('admin.movie.show');
+	Route::get('/admin/quotes', 'showQuotes')->middleware('auth')->name('admin.quote.show');
+	Route::get('/admin/movies', 'showMovies')->middleware('auth')->name('admin.movie.show');
 });
 
 Route::controller(MovieController::class)->group(function () {

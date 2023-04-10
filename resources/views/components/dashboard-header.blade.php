@@ -6,7 +6,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dashboard</title>
+    <title>{{ __('dashboard.dashboard') }}</title>
     @vite('resources/css/app.css')
 </head>
 <body>
@@ -20,7 +20,7 @@
             <div class="lg:flex lg:flex-1 lg:justify-end">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button>Log out</button>
+                    <button>{{__('dashboard.log out')}}</button>
                 </form>
             </div>
         </nav>
@@ -33,10 +33,10 @@
         </div>
         <div class="mx-auto max-w-2xl">
             <div class="text-center">
-                <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Dashboard</h1>
+                <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">{{ __('dashboard.dashboard') }}</h1>
                 <div class="mt-10 flex items-center justify-center gap-x-6 pb-20">
-                    <a href="{{ route('admin.quote.show') }}" class="{{ $page === "quotes" ? 'main-dashboard-button' : 'secondary-dashboard-button' }}">Quotes</a>
-                    <a href="{{ route('admin.movie.show') }}" class="{{ $page === "movies" ? 'main-dashboard-button' : 'secondary-dashboard-button' }}">Movies</a>
+                    <a href="{{ route('admin.quote.show') }}" class="{{ $page === "quotes" ? 'main-dashboard-button' : 'secondary-dashboard-button' }}">{{ __('dashboard.quotes') }}</a>
+                    <a href="{{ route('admin.movie.show') }}" class="{{ $page === "movies" ? 'main-dashboard-button' : 'secondary-dashboard-button' }}">{{ __('dashboard.movies') }}</a>
                 </div>
                 {{ $slot }}
             </div>
