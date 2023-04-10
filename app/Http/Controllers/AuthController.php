@@ -19,6 +19,6 @@ class AuthController extends Controller
 	public function logout(): RedirectResponse
 	{
 		auth()->logout();
-		return redirect('/');
+		return redirect()->route('quote.show');
 	}
 }

@@ -5,7 +5,7 @@
         @vite('resources/css/app.css')
     </head>
     <body class="h-full md:flex md:justify-center md:items-center">
-        <form method="POST" action="/{{ $type === 'update'? ($data . '/' . $value->id) : $data }}" enctype="multipart/form-data" class="md:w-1/2  m-10">
+        <form method="POST" action="{{ $type === 'update'? route($data . '.edit', [$data => $value->id]) : route($data . '.store') }}" enctype="multipart/form-data" class="md:w-1/2  m-10">
             @csrf
             @if($type === 'update')
                 @method('PUT')
@@ -15,10 +15,10 @@
                     <h2 class="text-base font-semibold leading-7 text-gray-900">{{$type === 'update' ? 'Update' : 'Add' . ' ' . $data }}</h2>
                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div class="sm:col-span-4">
-                            <label for="name_en" class="block text-sm font-medium leading-6 text-gray-900">{{ $data === 'movies' ? 'Name' : 'Body'}} en</label>
+                            <label for="name_en" class="block text-sm font-medium leading-6 text-gray-900">{{ $data === 'movie' ? 'Name' : 'Body'}} en</label>
                             <div class="mt-2">
                                 <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                    <input value="{{ $type === 'update' ? ($data === 'movies'? ($value->getTranslations('name')['en'] ) : $value->getTranslations('body')['en']) : '' }}" type="text" name="name[en]" id="name_en" autocomplete="name_en" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="Enter name" />
+                                    <input value="{{ $type === 'update' ? ($data === 'movie'? $value->name : $value->body): '' }}" type="text" name="name[en]" id="name_en" autocomplete="name_en" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="Enter name" />
                                 </div>
                                 @error('name.en')
                                 <p class='text-xs text-red-500'>{{ $message }}</p>
@@ -29,14 +29,14 @@
                             <label for="name_ka" class="block text-sm font-medium leading-6 text-gray-900">{{ $data === 'movies' ? 'Name' : 'Body'}} ka</label>
                             <div class="mt-2">
                                 <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                    <input value="{{ $type === 'update' ? ($data === 'movies'? $value->getTranslations('name')['ka'] : $value->getTranslations('body')['ka']) : '' }}" type="text" name="name[ka]" id="name_ka" autocomplete="name_ka" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="Enter name" />
+                                    <input value="{{ $type === 'update' ? ($data === 'movie'? $value->name : $value->body) : '' }}" type="text" name="name[ka]" id="name_ka" autocomplete="name_ka" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="Enter name" />
                                 </div>
                                 @error('name.ka')
                                 <p class='text-xs text-red-500'>{{ $message }}</p>
                                 @enderror
                             </div>
                         </div>
-                        @if($data === 'quotes')
+                        @if($data === 'quote')
                             <div class="col-span-full">
                                 <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900">Cover photo</label>
                                 <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
@@ -61,7 +61,7 @@
                         @endif
                     </div>
                 </div>
-                    @if($data === 'quotes')
+                    @if($data === 'quote')
                         <div class="sm:col-span-3">
                             <label for="movie" class="block text-sm font-medium leading-6 text-gray-900">Movie</label>
                             <div class="mt-2">

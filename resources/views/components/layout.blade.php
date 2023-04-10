@@ -9,8 +9,8 @@
     </head>
     <body class="w-full flex justify-center gradient static">
         <div class="absolute lg:fixed left-[54px] inset-y-0 flex flex-col flex flex-col mt-5 lg:justify-center space-y-[15px]">
-            <a href="{{ $link }}"><div class="{{ $lang === 'ka' ? 'language-buttons' : 'language-buttons bg-white text-black bg-white' }}">en</div></a>
-            <a href="{{$link . 'ka'}}"><div class="{{ $lang === 'ka' ? 'language-buttons bg-white text-black bg-white' : 'language-buttons'}}">ka</div></a>
+            <div class="{{ $lang === 'ka' ? 'language-buttons' : 'language-buttons bg-white text-black bg-white' }}">en</div>
+            <div class="{{ $lang === 'ka' ? 'language-buttons bg-white text-black bg-white' : 'language-buttons'}}">ka</div>
         </div>
         {{ $slot }}
     </body>

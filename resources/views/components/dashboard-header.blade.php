@@ -18,7 +18,7 @@
             </div>
 
             <div class="lg:flex lg:flex-1 lg:justify-end">
-                <form action="/logout" method="POST">
+                <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button>Log out</button>
                 </form>
@@ -35,8 +35,8 @@
             <div class="text-center">
                 <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Dashboard</h1>
                 <div class="mt-10 flex items-center justify-center gap-x-6 pb-20">
-                    <a href="/admin-quotes" class="{{ $page === "quotes" ? 'main-dashboard-button' : 'secondary-dashboard-button' }}">Quotes</a>
-                    <a href="/admin-movies" class="{{ $page === "movies" ? 'main-dashboard-button' : 'secondary-dashboard-button' }}">Movies</a>
+                    <a href="{{ route('quote.showList') }}" class="{{ $page === "quotes" ? 'main-dashboard-button' : 'secondary-dashboard-button' }}">Quotes</a>
+                    <a href="{{ route('movie.showList') }}" class="{{ $page === "movies" ? 'main-dashboard-button' : 'secondary-dashboard-button' }}">Movies</a>
                 </div>
                 {{ $slot }}
             </div>

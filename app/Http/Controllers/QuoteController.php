@@ -15,9 +15,6 @@ class QuoteController extends Controller
 {
 	public function show($lang = ''): View|RedirectResponse
 	{
-		if ($lang != '' and $lang != 'ka') {
-			return redirect()->route('quote.show');
-		}
 		$quote = Quote::all()->random();
 		$movie = Movie::findOrFail($quote->movie_id);
 		return view('landing', [
@@ -32,7 +29,7 @@ class QuoteController extends Controller
 		$imagePath = Quote::find(request()->quote)->thumbnail;
 		Quote::destroy(request()->quote);
 		Storage::delete($imagePath);
-		return redirect('/admin-quotes');
+		return redirect()->route('quote.showList');
 	}
 
 	public function store(StoreQuoteRequest $request): RedirectResponse
@@ -49,19 +46,19 @@ class QuoteController extends Controller
 			'movie_id'  => Movie::where('name->en', '=', $request->movie)->value('id'),
 		]);
 
-		return redirect('/admin-quotes');
+		return redirect()->route('quote.showList');
 	}
 
 	public function create(): View
 	{
 		return view('add-data', [
-			'data'   => 'quotes',
+			'data'   => 'quote',
 			'movies' => Movie::all(),
 			'type'   => 'add',
 		]);
 	}
 
-	public function showList()
+	public function showList(): View
 	{
 		return view('quotes-dashboard', [
 			'quotes' => Quote::all(),
@@ -72,7 +69,7 @@ class QuoteController extends Controller
 	{
 		$file = File::get($quote->thumbnail);
 		return view('add-data', [
-			'data'   => 'quotes',
+			'data'   => 'quote',
 			'value'  => $quote,
 			'movies' => Movie::all(),
 			'type'   => 'update',
@@ -91,6 +88,6 @@ class QuoteController extends Controller
 		$data->movie_id = Movie::where('name->en', '=', $request->movie)->value('id');
 		$data->save();
 
-		return redirect('admin-quotes');
+		return redirect()->route('quote.showList');
 	}
 }

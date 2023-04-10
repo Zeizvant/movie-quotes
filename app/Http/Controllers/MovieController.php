@@ -13,9 +13,6 @@ class MovieController extends Controller
 {
 	public function show(): View|RedirectResponse
 	{
-		if (request()->lang != '' and request()->lang != 'ka') {
-			return redirect()->route('movie.show');
-		}
 		$id = request()->movie;
 		$movie = Movie::findOrFail($id);
 		$quotes = Quote::all()->where('movie_id', $movie->id);
@@ -30,13 +27,13 @@ class MovieController extends Controller
 	public function delete(): RedirectResponse
 	{
 		Movie::destroy(request()->movie);
-		return redirect('/admin-movies');
+		return redirect()->route('movie.showList');
 	}
 
 	public function create(): View
 	{
 		return view('add-data', [
-			'data' => 'movies',
+			'data' => 'movie',
 			'type' => 'add',
 		]);
 	}
@@ -49,7 +46,7 @@ class MovieController extends Controller
 				'ka' => $request->name['ka'],
 			],
 		]);
-		return redirect('/admin-movies');
+		return redirect()->route('movie.showList');
 	}
 
 	public function showList(): View
@@ -62,7 +59,7 @@ class MovieController extends Controller
 	public function edit(Movie $movie): View
 	{
 		return view('add-data', [
-			'data'   => 'movies',
+			'data'   => 'movie',
 			'value'  => $movie,
 			'type'   => 'update',
 		]);
@@ -75,6 +72,6 @@ class MovieController extends Controller
 		$data->replaceTranslations('name', $translations);
 		$data->save();
 
-		return redirect('/admin-movies');
+		return redirect()->route('movie.showList');
 	}
 }
