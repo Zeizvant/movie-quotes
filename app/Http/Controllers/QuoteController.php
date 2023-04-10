@@ -19,12 +19,8 @@ class QuoteController extends Controller
 			return redirect()->route('quote.show');
 		}
 		$id = rand(1, sizeOf(Quote::all()));
-		$quote = Quote::find($id);
-		if ($quote) {
-			$movie = Movie::find($quote->movie_id);
-		} else {
-			$movie = '';
-		}
+		$quote = Quote::findOrFail($id);
+		$movie = Movie::findOrFail($quote->movie_id);
 		return view('landing', [
 			'quote' => $quote,
 			'movie' => $movie,

@@ -17,12 +17,8 @@ class MovieController extends Controller
 			return redirect()->route('movie.show');
 		}
 		$id = request()->movie;
-		$movie = Movie::find($id);
-		if ($movie) {
-			$quotes = Quote::all()->where('movie_id', $movie->id);
-		} else {
-			return abort(404);
-		}
+		$movie = Movie::findOrFail($id);
+		$quotes = Quote::all()->where('movie_id', $movie->id);
 
 		return view('movie', [
 			'quotes' => $quotes,
