@@ -58,13 +58,5 @@ class DatabaseSeeder extends Seeder
 			'thumbnail' => 'images/4.jpeg',
 			'movie_id'  => 2,
 		]);
-
-		//		\App\Models\Quote::factory(5)->create();
-		//		\App\Models\User::factory(10)->create();
-
-		//		\App\Models\User::factory()->create([
-		//			'username'  => 'Test User',
-		//			'email' => 'test@example.com',
-		//		]);
 	}
 }
