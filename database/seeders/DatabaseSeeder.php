@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
 				'en' => '“I’ll be back.”',
 				'ka' => 'ტესტ',
 			],
-			'thumbnail' => 'images/1.jpeg',
+			'thumbnail' => fake()->imageUrl(400, 400),
 			'movie_id'  => 1,
 		]);
 		Quote::factory()->create([
@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
 				'en' => '“You just can’t go around killing people.”',
 				'ka' => 'ტესტ',
 			],
-			'thumbnail' => 'images/2.jpg',
+			'thumbnail' => fake()->imageUrl(400, 400),
 			'movie_id'  => 1,
 		]);
 		Quote::factory()->create([
@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
 				'en' => '“Hasta la vista, baby.”',
 				'ka' => 'ტესტ',
 			],
-			'thumbnail' => 'images/3.jpeg',
+			'thumbnail' => fake()->imageUrl(400, 400),
 			'movie_id'  => 1,
 		]);
 		Quote::factory()->create([
@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
 				'en' => "“A-Ta-Ta-Ta-Ta, Let's Not Blow This Out Of Proportion.”",
 				'ka' => 'ტესტ',
 			],
-			'thumbnail' => 'images/4.jpeg',
+			'thumbnail' => fake()->imageUrl(400, 400),
 			'movie_id'  => 2,
 		]);
 		User::factory()->create([

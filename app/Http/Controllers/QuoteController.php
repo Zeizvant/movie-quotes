@@ -43,7 +43,7 @@ class QuoteController extends Controller
 				'ka' => $request->name['ka'],
 			],
 			'thumbnail' => $path,
-			'movie_id'  => Movie::where('name->en', '=', $request->movie)->value('id'),
+			'movie_id'  => Movie::where('name->' . app()->getLocale(), '=', $request->movie)->value('id'),
 		]);
 
 		return redirect()->route('admin.quote.show');
@@ -78,7 +78,7 @@ class QuoteController extends Controller
 		$data = Quote::find($quote->id);
 		$data->replaceTranslations('body', $translations);
 		$data->thumbnail = $path;
-		$data->movie_id = Movie::where('name->en', '=', $request->movie)->value('id');
+		$data->movie_id = Movie::where('name->' . app()->getLocale(), '=', $request->movie)->value('id');
 		$data->save();
 
 		return redirect()->route('admin.quote.show');
