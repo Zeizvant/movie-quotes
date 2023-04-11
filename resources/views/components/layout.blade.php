@@ -4,14 +4,14 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Movie Quotes</title>
+        <title>{{ __('dashboard.movie quotes') }}</title>
         @vite('resources/css/app.css')
     </head>
     <body class="w-full flex justify-center gradient static">
         <div class="absolute lg:fixed left-[54px] inset-y-0 flex flex-col flex flex-col mt-5 lg:justify-center space-y-[15px]">
-            <div class="language-buttons">en</div>
-            <div class="language-buttons bg-white text-black bg-white">ka</div>
+            <a href="{{ route('language.change', ['locale' => 'en']) }}"><div class="{{ app()->getLocale() === 'en' ?  'language-buttons bg-white text-black bg-white' : 'language-buttons'}}">en</div></a>
+            <a href="{{ route('language.change', ['locale' => 'ka']) }}"><div class="{{ app()->getLocale() === 'ka' ?  'language-buttons bg-white text-black bg-white' : 'language-buttons'}}">ka</div></a>
         </div>
-        {{ $slot  }}
+        {{ $slot }}
     </body>
 </html>
