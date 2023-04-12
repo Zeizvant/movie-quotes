@@ -18,7 +18,7 @@
             </div>
 
             <div class="lg:flex lg:flex-1 lg:justify-end">
-                <form action="{{ route('logout') }}" method="POST">
+                <form action="{{ route('auth.logout') }}" method="POST">
                     @csrf
                     <button>{{__('dashboard.log out')}}</button>
                 </form>
