@@ -23,8 +23,8 @@ Route::get('/login', function () {
 })->middleware('guest')->name('login');
 
 Route::controller(AuthController::class)->group(function () {
-	Route::post('/login', 'login')->middleware('guest')->name('login');
-	Route::post('/logout', 'logout')->middleware('auth')->name('logout');
+	Route::post('/login', 'login')->middleware('guest')->name('auth.login');
+	Route::post('/logout', 'logout')->middleware('auth')->name('auth.logout');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'controller' => AdminController::class], function () {
