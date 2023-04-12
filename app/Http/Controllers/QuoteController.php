@@ -13,14 +13,13 @@ use App\Models\Quote;
 
 class QuoteController extends Controller
 {
-	public function show($lang = ''): View|RedirectResponse
+	public function show(): View|RedirectResponse
 	{
-		$quote = Quote::all()->random();
-		$movie = Movie::findOrFail($quote->movie_id);
+		$quote = Quote::all()->isNotEmpty() ? Quote::all()->random() : '';
+		$movie = $quote ? Movie::findOrFail($quote->movie_id) : '';
 		return view('landing', [
 			'quote' => $quote,
 			'movie' => $movie,
-			'lang'  => $lang,
 		]);
 	}
 

@@ -20,7 +20,6 @@ class MovieController extends Controller
 		return view('movie', [
 			'quotes' => $quotes,
 			'movie'  => $movie,
-			'lang'   => request()->lang,
 		]);
 	}
 
