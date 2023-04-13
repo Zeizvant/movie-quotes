@@ -13,7 +13,7 @@ class CreateUser extends Command
 	 *
 	 * @var string
 	 */
-	protected $signature = 'app:create-user {username} {password}';
+	protected $signature = 'app:create-user';
 
 	/**
 	 * The console command description.
@@ -29,19 +29,21 @@ class CreateUser extends Command
 	{
 		$validator = Validator::make(
 			[
-				'username'           => $this->argument('username'),
-				'password'           => bcrypt($this->argument('password')),
+				'username'                => $this->ask('username: '),
+				'password'                => $password = $this->secret('password: '),
+				'password_confirmation'   => $password = $this->secret('confirm password: '),
 			],
-			['username' => ['required', 'unique:users,username'],
-				'password' => ['required'],
+			[
+				'username'         => ['bail', 'required', 'unique:users,username'],
+				'password'         => ['required', 'confirmed'],
 			]
 		);
 		if ($validator->fails()) {
 			$this->error($validator->errors());
 		} else {
 			User::factory()->create([
-				'username'           => $this->argument('username'),
-				'password'           => bcrypt($this->argument('password')),
+				'username'           => $validator->validated()['username'],
+				'password'           => bcrypt($validator->validated()['password']),
 			]);
 		}
 	}
