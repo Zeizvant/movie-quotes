@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\User;
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 class CreateUser extends Command
 {
@@ -27,10 +27,22 @@ class CreateUser extends Command
 	 */
 	public function handle(): void
 	{
-		User::factory()->create([
-			'username'           => $this->argument('username'),
-			'password'           => bcrypt($this->argument('password')),
-			'remember_token'     => Str::random(10),
-		]);
+		$validator = Validator::make(
+			[
+				'username'           => $this->argument('username'),
+				'password'           => bcrypt($this->argument('password')),
+			],
+			['username' => ['required', 'unique:users,username'],
+				'password' => ['required'],
+			]
+		);
+		if ($validator->fails()) {
+			$this->error($validator->errors());
+		} else {
+			User::factory()->create([
+				'username'           => $this->argument('username'),
+				'password'           => bcrypt($this->argument('password')),
+			]);
+		}
 	}
 }
