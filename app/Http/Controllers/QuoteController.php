@@ -13,6 +13,13 @@ use App\Models\Quote;
 
 class QuoteController extends Controller
 {
+	public function showQuotes(): View
+	{
+		return view('quotes-dashboard', [
+			'quotes' => Quote::all(),
+		]);
+	}
+
 	public function show(): View|RedirectResponse
 	{
 		$quote = Quote::all()->isNotEmpty() ? Quote::all()->random() : '';

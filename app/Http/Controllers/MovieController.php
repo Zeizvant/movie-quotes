@@ -11,6 +11,13 @@ use Illuminate\View\View;
 
 class MovieController extends Controller
 {
+	public function showMovies(): View
+	{
+		return view('movies-dashboard', [
+			'movies' => Movie::all(),
+		]);
+	}
+
 	public function show(): View|RedirectResponse
 	{
 		$id = request()->movie;
