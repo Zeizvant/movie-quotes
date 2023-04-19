@@ -9,8 +9,7 @@ class AuthController extends Controller
 {
 	public function login(LoginRequest $request): RedirectResponse
 	{
-		$attributes = ['username' => $request->username, 'password' => $request->password];
-		if (auth()->attempt($attributes)) {
+		if (auth()->attempt(['username' => $request->username, 'password' => $request->password])) {
 			return redirect()->route('admin.movie.show');
 		}
 		return back()->withErrors(['password' => 'invalid password']);
