@@ -22,11 +22,10 @@ class QuoteController extends Controller
 
 	public function show(Quote $quote): View|RedirectResponse
 	{
-		$quote = Quote::all()->isNotEmpty() ? Quote::all()->random() : '';
-		$movie = $quote ? $quote->movie : '';
+		$quote = Quote::all();
+		//		$movie = $quote ? $quote->movie : '';
 		return view('landing', [
 			'quote' => $quote,
-			'movie' => $movie,
 		]);
 	}
 
