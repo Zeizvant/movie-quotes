@@ -27,38 +27,8 @@ class DatabaseSeeder extends Seeder
 				'ka' => 'შავი რაინდი',
 			],
 		]);
-		Quote::factory()->create([
-			'body'      => [
-				'en' => '“I’ll be back.”',
-				'ka' => 'ტესტ',
-			],
-			'thumbnail' => fake()->imageUrl(400, 400),
-			'movie_id'  => 1,
-		]);
-		Quote::factory()->create([
-			'body'      => [
-				'en' => '“You just can’t go around killing people.”',
-				'ka' => 'ტესტ',
-			],
-			'thumbnail' => fake()->imageUrl(400, 400),
-			'movie_id'  => 1,
-		]);
-		Quote::factory()->create([
-			'body'      => [
-				'en' => '“Hasta la vista, baby.”',
-				'ka' => 'ტესტ',
-			],
-			'thumbnail' => fake()->imageUrl(400, 400),
-			'movie_id'  => 1,
-		]);
-		Quote::factory()->create([
-			'body'      => [
-				'en' => "“A-Ta-Ta-Ta-Ta, Let's Not Blow This Out Of Proportion.”",
-				'ka' => 'ტესტ',
-			],
-			'thumbnail' => fake()->imageUrl(400, 400),
-			'movie_id'  => 2,
-		]);
+		Quote::factory(5)->create();
+
 		User::factory()->create([
 			'username' => 'admin',
 			'password' => bcrypt('admin'),
