@@ -15,4 +15,9 @@ class Movie extends Model
 	protected $guarded = [];
 
 	public $translatable = ['name'];
+
+	public function quotes()
+	{
+		return $this->hasMany(Quote::class, 'movie_id', 'id');
+	}
 }

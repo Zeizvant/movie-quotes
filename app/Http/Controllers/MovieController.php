@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Movie\StoreMovieRequest;
 use App\Http\Requests\Movie\UpdateMovieRequest;
 use App\Models\Movie;
-use App\Models\Quote;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -18,14 +17,10 @@ class MovieController extends Controller
 		]);
 	}
 
-	public function show(): View|RedirectResponse
+	public function show(Movie $movie): View|RedirectResponse
 	{
-		$id = request()->movie;
-		$movie = Movie::findOrFail($id);
-		$quotes = Quote::all()->where('movie_id', $movie->id);
-
 		return view('movie', [
-			'quotes' => $quotes,
+			'quotes' => $movie->quotes,
 			'movie'  => $movie,
 		]);
 	}

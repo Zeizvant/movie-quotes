@@ -10,4 +10,5 @@ return [
 	'delete'       => 'delete',
 	'add movie'    => 'add movie',
 	'add quote'    => 'add quote',
+	'no data'      => 'no data',
 ];

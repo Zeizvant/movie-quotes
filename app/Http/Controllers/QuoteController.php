@@ -20,10 +20,10 @@ class QuoteController extends Controller
 		]);
 	}
 
-	public function show(): View|RedirectResponse
+	public function show(Quote $quote): View|RedirectResponse
 	{
 		$quote = Quote::all()->isNotEmpty() ? Quote::all()->random() : '';
-		$movie = $quote ? Movie::findOrFail($quote->movie_id) : '';
+		$movie = $quote ? $quote->movie : '';
 		return view('landing', [
 			'quote' => $quote,
 			'movie' => $movie,
