@@ -15,18 +15,7 @@ class DatabaseSeeder extends Seeder
 	 */
 	public function run(): void
 	{
-		Movie::factory()->create([
-			'name' => [
-				'en' => 'The Terminator',
-				'ka' => 'ტერმინატორი',
-			],
-		]);
-		Movie::factory()->create([
-			'name' => [
-				'en' => 'The Dark Knight',
-				'ka' => 'შავი რაინდი',
-			],
-		]);
+		Movie::factory()->create();
 		Quote::factory(5)->create();
 
 		User::factory()->create([
