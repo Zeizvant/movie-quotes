@@ -11,10 +11,10 @@ return [
 	'choose movie'           => 'Choose movie',
 	'movie'                  => 'Movie',
 	'quote'                  => 'Quote',
-	'enter name'             => 'Enter name',
-	'enter quote'            => 'Enter quote',
+	'enter_name'             => 'Enter name',
+	'enter_quote'            => 'Enter quote',
 	'login'                  => 'Login',
-	'log in to your account' => 'Log in to your account',
+	'log_in_to_your_account' => 'Log in to your account',
 	'username'               => 'Username',
 	'password'               => 'Password',
 ];
