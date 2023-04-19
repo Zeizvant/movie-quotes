@@ -42,7 +42,7 @@ class QuoteController extends Controller
 	{
 		$image = $request->file('thumbnail');
 		$path = $image->store('images');
-
+		//		dd($request->validated());
 		Quote::create([
 			'body'      => [
 				'en' => $request->name['en'],

@@ -41,12 +41,7 @@ class MovieController extends Controller
 
 	public function store(StoreMovieRequest $request): RedirectResponse
 	{
-		Movie::create([
-			'name' => [
-				'en' => $request->name['en'],
-				'ka' => $request->name['ka'],
-			],
-		]);
+		Movie::create($request->validated());
 		return redirect()->route('admin.movie.show');
 	}
 
