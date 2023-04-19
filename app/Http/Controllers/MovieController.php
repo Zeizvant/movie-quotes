@@ -33,7 +33,7 @@ class MovieController extends Controller
 
 	public function create(): View
 	{
-		return view('add-data', [
+		return view('store-quote-movie', [
 			'data' => 'movie',
 			'type' => 'add',
 		]);
@@ -47,7 +47,7 @@ class MovieController extends Controller
 
 	public function edit(Movie $movie): View
 	{
-		return view('add-data', [
+		return view('store-quote-movie', [
 			'data'   => 'movie',
 			'value'  => $movie,
 			'type'   => 'update',
