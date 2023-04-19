@@ -30,7 +30,7 @@ class QuoteController extends Controller
 
 	public function delete(Quote $quote): RedirectResponse
 	{
-		$imagePath = Quote::find(request()->quote)->thumbnail;
+		$imagePath = $quote->thumbnail;
 		$quote->delete();
 		Storage::delete($imagePath);
 		return redirect()->route('admin.quote.show');
@@ -40,14 +40,13 @@ class QuoteController extends Controller
 	{
 		$image = $request->file('thumbnail');
 		$path = $image->store('images');
-		//		dd($request->validated());
 		Quote::create([
 			'body'      => [
 				'en' => $request->name['en'],
 				'ka' => $request->name['ka'],
 			],
 			'thumbnail' => $path,
-			'movie_id'  => Movie::where('name->' . app()->getLocale(), '=', $request->movie)->value('id'),
+			'movie_id'  => Movie::where('name->' . app()->getLocale(), '=', $request->movie_id)->value('id'),
 		]);
 
 		return redirect()->route('admin.quote.show');
@@ -82,7 +81,7 @@ class QuoteController extends Controller
 		$data = Quote::find($quote->id);
 		$data->replaceTranslations('body', $translations);
 		$data->thumbnail = $path;
-		$data->movie_id = Movie::where('name->' . app()->getLocale(), '=', $request->movie)->value('id');
+		$data->movie_id = Movie::where('name->' . app()->getLocale(), '=', $request->movie_id)->value('id');
 		$data->save();
 
 		return redirect()->route('admin.quote.show');
