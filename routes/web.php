@@ -28,7 +28,7 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::controller(MovieController::class)->group(function () {
 	Route::get('/movie/{movie}', 'show')->name('movie.show');
-	Route::get('/admin/movies', 'showMovies')->middleware('auth')->name('admin.movie.show');
+	Route::get('/admin/movies', 'index')->middleware('auth')->name('admin.movie.show');
 });
 
 Route::group(['prefix' => 'movies', 'middleware' => ['auth'], 'controller' => MovieController::class], function () {
@@ -41,7 +41,7 @@ Route::group(['prefix' => 'movies', 'middleware' => ['auth'], 'controller' => Mo
 
 Route::controller(QuoteController::class)->group(function () {
 	Route::get('/', 'show')->name('quote.show');
-	Route::get('/admin/quotes', 'showQuotes')->middleware('auth')->name('admin.quote.show');
+	Route::get('/admin/quotes', 'index')->middleware('auth')->name('admin.quote.show');
 });
 
 Route::group(['prefix' => 'quotes', 'middleware' => ['auth'], 'controller' => QuoteController::class], function () {

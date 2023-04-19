@@ -11,7 +11,7 @@ use Illuminate\View\View;
 
 class MovieController extends Controller
 {
-	public function showMovies(): View
+	public function index(): View
 	{
 		return view('movies-dashboard', [
 			'movies' => Movie::all(),

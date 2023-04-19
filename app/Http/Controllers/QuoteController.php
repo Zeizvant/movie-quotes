@@ -13,7 +13,7 @@ use App\Models\Quote;
 
 class QuoteController extends Controller
 {
-	public function showQuotes(): View
+	public function index(): View
 	{
 		return view('quotes-dashboard', [
 			'quotes' => Quote::all(),
