@@ -8,7 +8,7 @@ return [
 	'add'                    => 'Add',
 	'photo'                  => 'Photo',
 	'upload'                 => 'Upload',
-	'choose movie'           => 'Choose movie',
+	'choose_movie'           => 'Choose movie',
 	'movie'                  => 'Movie',
 	'quote'                  => 'Quote',
 	'enter_name'             => 'Enter name',
