@@ -25,9 +25,9 @@ class MovieController extends Controller
 		]);
 	}
 
-	public function delete(): RedirectResponse
+	public function delete(Movie $movie): RedirectResponse
 	{
-		Movie::destroy(request()->movie);
+		$movie->delete();
 		return redirect()->route('admin.movie.show');
 	}
 

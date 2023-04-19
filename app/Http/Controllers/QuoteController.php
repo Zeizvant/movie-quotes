@@ -30,10 +30,10 @@ class QuoteController extends Controller
 		]);
 	}
 
-	public function delete(): RedirectResponse
+	public function delete(Quote $quote): RedirectResponse
 	{
 		$imagePath = Quote::find(request()->quote)->thumbnail;
-		Quote::destroy(request()->quote);
+		$quote->delete();
 		Storage::delete($imagePath);
 		return redirect()->route('admin.quote.show');
 	}
@@ -55,11 +55,11 @@ class QuoteController extends Controller
 		return redirect()->route('admin.quote.show');
 	}
 
-	public function create(): View
+	public function create(Movie $movie): View
 	{
 		return view('add-data', [
 			'data'   => 'quote',
-			'movies' => Movie::all(),
+			'movies' => $movie->all(),
 			'type'   => 'add',
 		]);
 	}
