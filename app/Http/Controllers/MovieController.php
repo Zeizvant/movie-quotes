@@ -54,7 +54,7 @@ class MovieController extends Controller
 		]);
 	}
 
-	public function update(Movie $movie, UpdateMovieRequest $request): RedirectResponse
+	public function update(UpdateMovieRequest $request, Movie $movie): RedirectResponse
 	{
 		$translations = ['en' => $request->name['en'], 'ka' => $request->name['ka']];
 		$data = Movie::find($movie->id);

@@ -75,7 +75,7 @@ class QuoteController extends Controller
 		]);
 	}
 
-	public function update(Quote $quote, UpdateQuoteRequest $request): RedirectResponse
+	public function update(UpdateQuoteRequest $request, Quote $quote): RedirectResponse
 	{
 		$image = $request->file('thumbnail');
 		$path = $image->store('images');
