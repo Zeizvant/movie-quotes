@@ -13,7 +13,6 @@
                     <h1 class="text-white text-5xl">{{ __('dashboard.no_data') }}</h1>
                 </div>
             @endif
-
         </div>
     @else
         <div class="mt-40 lg:mt-20 mb-20">

@@ -14,10 +14,10 @@ class UpdateQuoteRequest extends FormRequest
 	public function rules(): array
 	{
 		return [
-			'name.en'               => 'required',
-			'name.ka'               => 'required',
-			'movie_id'              => 'required',
-			'thumbnail'             => 'required',
+			'name.en'                  => 'required',
+			'name.ka'                  => 'required',
+			'movie_id'                 => 'required',
+			'thumbnail'                => 'required',
 		];
 	}
 }

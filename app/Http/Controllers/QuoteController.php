@@ -19,9 +19,9 @@ class QuoteController extends Controller
 		]);
 	}
 
-	public function show(Quote $quote): View|RedirectResponse
+	public function show(): View|RedirectResponse
 	{
-		$quote = Quote::all();
+		$quote = Quote::all()->isNotEmpty() ? Quote::all()->random()->load('movie') : null;
 		return view('landing', [
 			'quote' => $quote,
 		]);
@@ -40,12 +40,9 @@ class QuoteController extends Controller
 		$image = $request->file('thumbnail');
 		$path = $image->store('images');
 		Quote::create([
-			'body'      => [
-				'en' => $request->name['en'],
-				'ka' => $request->name['ka'],
-			],
+			'body'      => $request->body,
 			'thumbnail' => $path,
-			'movie_id'  => Movie::where('name->' . app()->getLocale(), '=', $request->movie_id)->value('id'),
+			'movie_id'  => $request->movie_id,
 		]);
 
 		return redirect()->route('admin.quote.show');
@@ -73,15 +70,13 @@ class QuoteController extends Controller
 	public function update(UpdateQuoteRequest $request, Quote $quote): RedirectResponse
 	{
 		$image = $request->file('thumbnail');
+		$imagePath = $quote->thumbnail;
+		Storage::delete($imagePath);
 		$path = $image->store('images');
-		$translations = ['en' => $request->name['en'], 'ka' => $request->name['ka']];
-
-		$data = Quote::find($quote->id);
-		$data->replaceTranslations('body', $translations);
-		$data->thumbnail = $path;
-		$data->movie_id = Movie::where('name->' . app()->getLocale(), '=', $request->movie_id)->value('id');
-		$data->save();
-
+		$quote->replaceTranslations('body', ['en' => $request->name['en'], 'ka' => $request->name['ka']]);
+		$quote->thumbnail = $path;
+		$quote->movie_id = $request->movie_id;
+		$quote->save();
 		return redirect()->route('admin.quote.show');
 	}
 }
