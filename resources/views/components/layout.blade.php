@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ __('dashboard.movie quotes') }}</title>
+        <title>{{ __('dashboard.movie_quotes') }}</title>
         @vite('resources/css/app.css')
     </head>
     <body class="w-full flex justify-center gradient static">

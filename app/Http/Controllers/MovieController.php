@@ -5,40 +5,35 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Movie\StoreMovieRequest;
 use App\Http\Requests\Movie\UpdateMovieRequest;
 use App\Models\Movie;
-use App\Models\Quote;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class MovieController extends Controller
 {
-	public function showMovies(): View
+	public function index(): View
 	{
 		return view('movies-dashboard', [
 			'movies' => Movie::all(),
 		]);
 	}
 
-	public function show(): View|RedirectResponse
+	public function show(Movie $movie): View|RedirectResponse
 	{
-		$id = request()->movie;
-		$movie = Movie::findOrFail($id);
-		$quotes = Quote::all()->where('movie_id', $movie->id);
-
 		return view('movie', [
-			'quotes' => $quotes,
+			'quotes' => $movie->quotes,
 			'movie'  => $movie,
 		]);
 	}
 
-	public function delete(): RedirectResponse
+	public function delete(Movie $movie): RedirectResponse
 	{
-		Movie::destroy(request()->movie);
+		$movie->delete();
 		return redirect()->route('admin.movie.show');
 	}
 
 	public function create(): View
 	{
-		return view('add-data', [
+		return view('store-quote-movie', [
 			'data' => 'movie',
 			'type' => 'add',
 		]);
@@ -46,30 +41,23 @@ class MovieController extends Controller
 
 	public function store(StoreMovieRequest $request): RedirectResponse
 	{
-		Movie::create([
-			'name' => [
-				'en' => $request->name['en'],
-				'ka' => $request->name['ka'],
-			],
-		]);
+		Movie::create($request->validated());
 		return redirect()->route('admin.movie.show');
 	}
 
 	public function edit(Movie $movie): View
 	{
-		return view('add-data', [
+		return view('store-quote-movie', [
 			'data'   => 'movie',
 			'value'  => $movie,
 			'type'   => 'update',
 		]);
 	}
 
-	public function update(Movie $movie, UpdateMovieRequest $request): RedirectResponse
+	public function update(UpdateMovieRequest $request, Movie $movie): RedirectResponse
 	{
-		$translations = ['en' => $request->name['en'], 'ka' => $request->name['ka']];
-		$data = Movie::find($movie->id);
-		$data->replaceTranslations('name', $translations);
-		$data->save();
+		$movie->replaceTranslations('name', ['en' => $request->name['en'], 'ka' => $request->name['ka']]);
+		$movie->save();
 
 		return redirect()->route('admin.movie.show');
 	}

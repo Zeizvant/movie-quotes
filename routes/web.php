@@ -28,28 +28,28 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::controller(MovieController::class)->group(function () {
 	Route::get('/movie/{movie}', 'show')->name('movie.show');
-	Route::get('/admin/movies', 'showMovies')->middleware('auth')->name('admin.movie.show');
 });
 
-Route::group(['prefix' => 'movies', 'middleware' => ['auth'], 'controller' => MovieController::class], function () {
-	Route::delete('{movie}', 'delete')->name('movie.delete');
-	Route::get('create', 'create')->name('movie.create');
-	Route::post('/', 'store')->name('movie.store');
-	Route::get('{movie}/edit', 'edit')->name('movie.edit');
-	Route::put('{movie}', 'update')->name('movie.update');
+Route::group(['middleware' => ['auth'], 'controller' => MovieController::class], function () {
+	Route::delete('/movies/{movie}', 'delete')->name('movie.delete');
+	Route::get('/movies/create', 'create')->name('movie.create');
+	Route::post('/movies/', 'store')->name('movie.store');
+	Route::get('/movies/{movie}/edit', 'edit')->name('movie.edit');
+	Route::put('/movies/{movie}', 'update')->name('movie.update');
+	Route::get('/admin/movies', 'index')->name('admin.movie.show');
 });
 
 Route::controller(QuoteController::class)->group(function () {
 	Route::get('/', 'show')->name('quote.show');
-	Route::get('/admin/quotes', 'showQuotes')->middleware('auth')->name('admin.quote.show');
 });
 
-Route::group(['prefix' => 'quotes', 'middleware' => ['auth'], 'controller' => QuoteController::class], function () {
-	Route::delete('{quote}', 'delete')->name('quote.delete');
-	Route::get('create', 'create')->name('quote.create');
-	Route::post('/', 'store')->name('quote.store');
-	Route::get('{quote}/edit', 'edit')->name('quote.edit');
-	Route::put('{quote}', 'update')->name('quote.update');
+Route::group(['middleware' => ['auth'], 'controller' => QuoteController::class], function () {
+	Route::delete('/quotes/{quote}', 'delete')->name('quote.delete');
+	Route::get('/quotes/create', 'create')->name('quote.create');
+	Route::post('/quotes/', 'store')->name('quote.store');
+	Route::get('/quotes/{quote}/edit', 'edit')->name('quote.edit');
+	Route::put('/quotes/{quote}', 'update')->name('quote.update');
+	Route::get('/admin/quotes', 'index')->name('admin.quote.show');
 });
 
 Route::get('/change/{locale}', [LanguageController::class, 'setLocale'])->name('language.change');

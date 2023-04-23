@@ -6,14 +6,13 @@ use App\Http\Requests\Quote\StoreQuoteRequest;
 use App\Http\Requests\Quote\UpdateQuoteRequest;
 use App\Models\Movie;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use App\Models\Quote;
 
 class QuoteController extends Controller
 {
-	public function showQuotes(): View
+	public function index(): View
 	{
 		return view('quotes-dashboard', [
 			'quotes' => Quote::all(),
@@ -22,18 +21,16 @@ class QuoteController extends Controller
 
 	public function show(): View|RedirectResponse
 	{
-		$quote = Quote::all()->isNotEmpty() ? Quote::all()->random() : '';
-		$movie = $quote ? Movie::findOrFail($quote->movie_id) : '';
+		$quote = Quote::all()->isNotEmpty() ? Quote::all()->random()->load('movie') : null;
 		return view('landing', [
 			'quote' => $quote,
-			'movie' => $movie,
 		]);
 	}
 
-	public function delete(): RedirectResponse
+	public function delete(Quote $quote): RedirectResponse
 	{
-		$imagePath = Quote::find(request()->quote)->thumbnail;
-		Quote::destroy(request()->quote);
+		$imagePath = $quote->thumbnail;
+		$quote->delete();
 		Storage::delete($imagePath);
 		return redirect()->route('admin.quote.show');
 	}
@@ -42,32 +39,27 @@ class QuoteController extends Controller
 	{
 		$image = $request->file('thumbnail');
 		$path = $image->store('images');
-
 		Quote::create([
-			'body'      => [
-				'en' => $request->name['en'],
-				'ka' => $request->name['ka'],
-			],
+			'body'      => $request->body,
 			'thumbnail' => $path,
-			'movie_id'  => Movie::where('name->' . app()->getLocale(), '=', $request->movie)->value('id'),
+			'movie_id'  => $request->movie_id,
 		]);
 
 		return redirect()->route('admin.quote.show');
 	}
 
-	public function create(): View
+	public function create(Movie $movie): View
 	{
-		return view('add-data', [
+		return view('store-quote-movie', [
 			'data'   => 'quote',
-			'movies' => Movie::all(),
+			'movies' => $movie->all(),
 			'type'   => 'add',
 		]);
 	}
 
 	public function edit(Quote $quote): View
 	{
-		$file = File::get($quote->thumbnail);
-		return view('add-data', [
+		return view('store-quote-movie', [
 			'data'   => 'quote',
 			'value'  => $quote,
 			'movies' => Movie::all(),
@@ -75,18 +67,16 @@ class QuoteController extends Controller
 		]);
 	}
 
-	public function update(Quote $quote, UpdateQuoteRequest $request): RedirectResponse
+	public function update(UpdateQuoteRequest $request, Quote $quote): RedirectResponse
 	{
 		$image = $request->file('thumbnail');
+		$imagePath = $quote->thumbnail;
+		Storage::delete($imagePath);
 		$path = $image->store('images');
-		$translations = ['en' => $request->name['en'], 'ka' => $request->name['ka']];
-
-		$data = Quote::find($quote->id);
-		$data->replaceTranslations('body', $translations);
-		$data->thumbnail = $path;
-		$data->movie_id = Movie::where('name->' . app()->getLocale(), '=', $request->movie)->value('id');
-		$data->save();
-
+		$quote->replaceTranslations('body', ['en' => $request->name['en'], 'ka' => $request->name['ka']]);
+		$quote->thumbnail = $path;
+		$quote->movie_id = $request->movie_id;
+		$quote->save();
 		return redirect()->route('admin.quote.show');
 	}
 }
