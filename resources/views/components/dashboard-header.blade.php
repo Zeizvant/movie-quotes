@@ -13,10 +13,14 @@
 <div class="bg-white">
     <header class="absolute inset-x-0 top-0 z-50">
         <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
-            <div class="flex lg:flex-1">
+            <div class="flex lg:flex-1 flex items-baseline gap-3">
                 {{ auth()->user()->username }}
+                @if(app()->getLocale() === 'ka')
+                    <a href="{{ route('language.change', ['locale' => 'en']) }}"><div class="w-10 h-10 language-buttons text-white bg-indigo-600">en</div></a>
+                @else
+                    <a href="{{ route('language.change', ['locale' => 'ka']) }}"><div class="w-10 h-10 language-buttons text-white bg-indigo-600">ka</div></a>
+                @endif
             </div>
-
             <div class="lg:flex lg:flex-1 lg:justify-end">
                 <form action="{{ route('auth.logout') }}" method="POST">
                     @csrf
