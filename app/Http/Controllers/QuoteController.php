@@ -74,7 +74,7 @@ class QuoteController extends Controller
 		Storage::delete($imagePath);
 		$path = $image->store('images');
 		$quote->replaceTranslations('body', ['en' => $request->name['en'], 'ka' => $request->name['ka']]);
-		$quote->thumbnail = $path;
+		$quote->thumbnail = 'storage/' . $path;
 		$quote->movie_id = $request->movie_id;
 		$quote->save();
 		return redirect()->route('admin.quote.show');

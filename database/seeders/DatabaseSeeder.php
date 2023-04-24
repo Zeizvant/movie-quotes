@@ -7,6 +7,7 @@ use App\Models\Movie;
 use App\Models\Quote;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,6 +16,7 @@ class DatabaseSeeder extends Seeder
 	 */
 	public function run(): void
 	{
+		Storage::makeDirectory('images');
 		Movie::factory()->create();
 		Quote::factory(5)->create();
 
