@@ -15,7 +15,7 @@
     <?php if($img): ?>
         <img class="h-16 w-28 object-cover" src="<?php echo e(asset('storage/' . $img)); ?>" />
     <?php endif; ?>
-    <p class="text-lg h-full flex justify-center items-center px-2 w-1/3 lg:w-1/2 p-2"><?php echo $link === 'quote' ? $body->getTranslation('body', app()->getLocale()) : $body->getTranslation('name', app()->getLocale()); ?></p>
+    <div class="text-lg h-5/6 overflow-y-scroll px-2 w-1/3 lg:w-1/2"><?php echo $link === 'quote' ? $body->getTranslation('body', app()->getLocale()) : $body->getTranslation('name', app()->getLocale()); ?></div>
     <div><a href="<?php echo e(route("{$link}.edit", [$link => $id])); ?>"><?php echo e(__('dashboard.update')); ?></a></div>
     <form method="POST" action="<?php echo e(route("{$link}.delete", [$link => $id])); ?>">
         <?php echo csrf_field(); ?>

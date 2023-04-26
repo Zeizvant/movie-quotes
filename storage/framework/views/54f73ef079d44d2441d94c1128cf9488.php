@@ -1,16 +1,14 @@
 <?php $attributes ??= new \Illuminate\View\ComponentAttributeBag; ?>
 <?php foreach($attributes->onlyProps(['page']) as $__key => $__value) {
-	$$__key = $$__key ?? $__value;
+    $$__key = $$__key ?? $__value;
 } ?>
 <?php $attributes = $attributes->exceptProps(['page']); ?>
 <?php foreach (array_filter((['page']), 'is_string', ARRAY_FILTER_USE_KEY) as $__key => $__value) {
-	$$__key = $$__key ?? $__value;
+    $$__key = $$__key ?? $__value;
 } ?>
 <?php $__defined_vars = get_defined_vars(); ?>
 <?php foreach ($attributes as $__key => $__value) {
-	if (array_key_exists($__key, $__defined_vars)) {
-		unset($$__key);
-	}
+    if (array_key_exists($__key, $__defined_vars)) unset($$__key);
 } ?>
 <?php unset($__defined_vars); ?>
 <!doctype html>
@@ -54,8 +52,8 @@
             <div class="text-center">
                 <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl"><?php echo e(__('dashboard.dashboard')); ?></h1>
                 <div class="mt-10 flex items-center justify-center gap-x-6 pb-20">
-                    <a href="<?php echo e(route('admin.quote.show')); ?>" class="<?php echo e($page === 'quotes' ? 'main-dashboard-button' : 'secondary-dashboard-button'); ?>"><?php echo e(__('dashboard.quotes')); ?></a>
-                    <a href="<?php echo e(route('admin.movie.show')); ?>" class="<?php echo e($page === 'movies' ? 'main-dashboard-button' : 'secondary-dashboard-button'); ?>"><?php echo e(__('dashboard.movies')); ?></a>
+                    <a href="<?php echo e(route('admin.quote.show')); ?>" class="<?php echo e($page === "quotes" ? 'main-dashboard-button' : 'secondary-dashboard-button'); ?>"><?php echo e(__('dashboard.quotes')); ?></a>
+                    <a href="<?php echo e(route('admin.movie.show')); ?>" class="<?php echo e($page === "movies" ? 'main-dashboard-button' : 'secondary-dashboard-button'); ?>"><?php echo e(__('dashboard.movies')); ?></a>
                 </div>
                 <?php echo e($slot); ?>
 
