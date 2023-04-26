@@ -4,7 +4,7 @@
     @if($type === 'update')
         @method('PUT')
     @endif
-    <div class="space-y-12 overflow-y-scroll">
+    <div class="space-y-12">
         <div class="border-b border-gray-900/10 pb-12">
             <h2 class="text-base font-semibold leading-7 text-gray-900">{{$type === 'update' ? __('forms.update') : __('forms.add')  }}</h2>
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">

@@ -20,7 +20,7 @@ class QuoteFactory extends Factory
 		return [
 			'body'      => fake()->paragraph(1),
 			'movie_id'  => Movie::factory(),
-			'thumbnail' => fake()->imageUrl(400, 400),
+			'thumbnail' => 'images/' . $this->faker->image(storage_path('app/public/images'), 640, 480, null, false),
 		];
 	}
 }
